@@ -163,6 +163,7 @@ class Client(object):
 
         # Upload datapackage.json
         for path in file_list:
+            print(filedata[path])
             self._upload_file(path, filedata[path])
 
         # TODO: (?) echo('Finalizing ... ', nl=False)
