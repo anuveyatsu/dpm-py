@@ -163,12 +163,13 @@ class Client(object):
 
         # Upload datapackage.json
         for path in file_list:
-            print(filedata[path])
             self._upload_file(path, filedata[path])
 
         # TODO: (?) echo('Finalizing ... ', nl=False)
         data_package_s3_url = filedata['datapackage.json']['upload_url'] + '/' +\
                               filedata['datapackage.json']['upload_query']['key']
+        
+        print(data_package_s3_url)
         response = self._apirequest(
             method='POST',
             url='/api/package/upload',
@@ -260,7 +261,7 @@ class Client(object):
         headers = kwargs.pop('headers', {})
         if self.token:
             headers.setdefault('Auth-Token', '%s' % self.token)
-
+        print(*args)
         response = methods.get(method)(url, *args, headers=headers, **kwargs)
 
         try:
